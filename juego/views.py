@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from .models import Pregunta
-#import demjson
+import demjson
 
-def redireccionar_inicio(request):
+def inicio(request):
+	html = "<html><body>Hola Mundo desde DJANGO</body></html>"
+	return render(request, 'juego/inicio.html',{})
+
+def empezar_juego(request):
 	diez_preguntas = Pregunta.objects.all();
+	#todas_categorias = Categoria.objects.all();
 	texto= [diez_preguntas[0].texto_pregunta,diez_preguntas[1].texto_pregunta];
 	alternativas1= [diez_preguntas[0].alternativa_1,diez_preguntas[1].alternativa_1];
 	alternativas2= [diez_preguntas[0].alternativa_2,diez_preguntas[1].alternativa_2];
@@ -11,11 +16,14 @@ def redireccionar_inicio(request):
 	alternativas4= [diez_preguntas[0].alternativa_4,diez_preguntas[1].alternativa_4];
 	ruta_imagen  = [diez_preguntas[0].ruta_imagen,diez_preguntas[1].ruta_imagen];
 	a_correctas =  [diez_preguntas[0].alternativa_correcta,diez_preguntas[1].alternativa_correcta];
+	#categorias = [todas_categorias[0]]
 
-	#json = demjson.encode(texto);
-	#print(json);
+	data = [ { 'a' : 1, 'b' : 2, 'c' : 3, 'd' : 4, 'e' : 5 } ]
 
-	return render(request, 'juego/inicio.html',{
+	json = demjson.encode(data)
+	print json
+
+	return render(request, 'juego/juego.html',{
 		'pregunta1':texto[0],
 		'pregunta2':texto[1],
 		'alternativa1_1':alternativas1[0],
@@ -31,3 +39,4 @@ def redireccionar_inicio(request):
 		'a_correcta_1':a_correctas[0],
 		'a_correcta_2':a_correctas[1],
 		})
+

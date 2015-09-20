@@ -1,5 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """cultura_chilenistica URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
 Examples:
@@ -19,4 +20,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('juego.urls')),
+    url(r'^juego$',include('juego.urls')),
 ]
